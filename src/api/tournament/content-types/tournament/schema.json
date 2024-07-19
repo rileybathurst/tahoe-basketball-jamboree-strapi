@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "year": {
-      "type": "integer"
-    },
     "games": {
       "type": "relation",
       "relation": "manyToMany",
@@ -35,6 +32,15 @@
     },
     "notes": {
       "type": "blocks"
+    },
+    "year": {
+      "type": "string",
+      "required": true,
+      "regex": "^\\d+$",
+      "unique": true
+    },
+    "name": {
+      "type": "string"
     }
   }
 }

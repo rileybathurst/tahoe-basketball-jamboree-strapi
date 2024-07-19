@@ -1099,7 +1099,6 @@ export interface ApiTournamentTournament extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    year: Attribute.Integer;
     games: Attribute.Relation<
       'api::tournament.tournament',
       'manyToMany',
@@ -1116,6 +1115,8 @@ export interface ApiTournamentTournament extends Schema.CollectionType {
       'api::team.team'
     >;
     notes: Attribute.Blocks;
+    year: Attribute.String & Attribute.Required & Attribute.Unique;
+    name: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
