@@ -12,6 +12,9 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "name": {
+      "type": "string"
+    },
     "games": {
       "type": "relation",
       "relation": "manyToMany",
@@ -38,9 +41,6 @@
       "required": true,
       "regex": "^\\d+$",
       "unique": true
-    },
-    "name": {
-      "type": "string"
     }
   }
 }
