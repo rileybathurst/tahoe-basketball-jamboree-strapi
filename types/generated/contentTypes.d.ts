@@ -788,6 +788,352 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiCoachCoach extends Schema.CollectionType {
+  collectionName: 'coaches';
+  info: {
+    singularName: 'coach';
+    pluralName: 'coaches';
+    displayName: 'coach';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    games: Attribute.Relation<
+      'api::coach.coach',
+      'manyToMany',
+      'api::game.game'
+    >;
+    teams: Attribute.Relation<
+      'api::coach.coach',
+      'manyToMany',
+      'api::team.team'
+    >;
+    schools: Attribute.Relation<
+      'api::coach.coach',
+      'manyToMany',
+      'api::school.school'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::coach.coach',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::coach.coach',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiGameGame extends Schema.CollectionType {
+  collectionName: 'games';
+  info: {
+    singularName: 'game';
+    pluralName: 'games';
+    displayName: 'game';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    date: Attribute.Date;
+    time: Attribute.Time;
+    home_team_score: Attribute.Integer;
+    away_team_score: Attribute.Integer;
+    home_teams: Attribute.Relation<
+      'api::game.game',
+      'manyToMany',
+      'api::team.team'
+    >;
+    locations: Attribute.Relation<
+      'api::game.game',
+      'manyToMany',
+      'api::location.location'
+    >;
+    tournaments: Attribute.Relation<
+      'api::game.game',
+      'manyToMany',
+      'api::tournament.tournament'
+    >;
+    rounds: Attribute.Relation<
+      'api::game.game',
+      'manyToMany',
+      'api::round.round'
+    >;
+    coaches: Attribute.Relation<
+      'api::game.game',
+      'manyToMany',
+      'api::coach.coach'
+    >;
+    fallback_winner: Attribute.Relation<
+      'api::game.game',
+      'oneToOne',
+      'api::team.team'
+    >;
+    away_teams: Attribute.Relation<
+      'api::game.game',
+      'manyToMany',
+      'api::team.team'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::game.game', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::game.game', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLocationLocation extends Schema.CollectionType {
+  collectionName: 'locations';
+  info: {
+    singularName: 'location';
+    pluralName: 'locations';
+    displayName: 'location';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    games: Attribute.Relation<
+      'api::location.location',
+      'manyToMany',
+      'api::game.game'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::location.location',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::location.location',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPlayerPlayer extends Schema.CollectionType {
+  collectionName: 'players';
+  info: {
+    singularName: 'player';
+    pluralName: 'players';
+    displayName: 'player';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    freethrow_winners: Attribute.Relation<
+      'api::player.player',
+      'oneToMany',
+      'api::tournament.tournament'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::player.player',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::player.player',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRoundRound extends Schema.CollectionType {
+  collectionName: 'rounds';
+  info: {
+    singularName: 'round';
+    pluralName: 'rounds';
+    displayName: 'round';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    games: Attribute.Relation<
+      'api::round.round',
+      'manyToMany',
+      'api::game.game'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::round.round',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::round.round',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSchoolSchool extends Schema.CollectionType {
+  collectionName: 'schools';
+  info: {
+    singularName: 'school';
+    pluralName: 'schools';
+    displayName: 'school';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    teams: Attribute.Relation<
+      'api::school.school',
+      'oneToMany',
+      'api::team.team'
+    >;
+    coaches: Attribute.Relation<
+      'api::school.school',
+      'manyToMany',
+      'api::coach.coach'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::school.school',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::school.school',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTeamTeam extends Schema.CollectionType {
+  collectionName: 'teams';
+  info: {
+    singularName: 'team';
+    pluralName: 'teams';
+    displayName: 'team';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    coaches: Attribute.Relation<
+      'api::team.team',
+      'manyToMany',
+      'api::coach.coach'
+    >;
+    tournaments: Attribute.Relation<
+      'api::team.team',
+      'manyToMany',
+      'api::tournament.tournament'
+    >;
+    school: Attribute.Relation<
+      'api::team.team',
+      'manyToOne',
+      'api::school.school'
+    >;
+    home_games: Attribute.Relation<
+      'api::team.team',
+      'manyToMany',
+      'api::game.game'
+    >;
+    away_games: Attribute.Relation<
+      'api::team.team',
+      'manyToMany',
+      'api::game.game'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTournamentTournament extends Schema.CollectionType {
+  collectionName: 'tournaments';
+  info: {
+    singularName: 'tournament';
+    pluralName: 'tournaments';
+    displayName: 'tournament';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    year: Attribute.Integer;
+    games: Attribute.Relation<
+      'api::tournament.tournament',
+      'manyToMany',
+      'api::game.game'
+    >;
+    player: Attribute.Relation<
+      'api::tournament.tournament',
+      'manyToOne',
+      'api::player.player'
+    >;
+    teams: Attribute.Relation<
+      'api::tournament.tournament',
+      'manyToMany',
+      'api::team.team'
+    >;
+    notes: Attribute.Blocks;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tournament.tournament',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tournament.tournament',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -806,6 +1152,14 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::coach.coach': ApiCoachCoach;
+      'api::game.game': ApiGameGame;
+      'api::location.location': ApiLocationLocation;
+      'api::player.player': ApiPlayerPlayer;
+      'api::round.round': ApiRoundRound;
+      'api::school.school': ApiSchoolSchool;
+      'api::team.team': ApiTeamTeam;
+      'api::tournament.tournament': ApiTournamentTournament;
     }
   }
 }
