@@ -788,6 +788,37 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiActivityActivity extends Schema.CollectionType {
+  collectionName: 'activities';
+  info: {
+    singularName: 'activity';
+    pluralName: 'activities';
+    displayName: 'activity';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    details: Attribute.Blocks;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::activity.activity',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::activity.activity',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiCoachCoach extends Schema.CollectionType {
   collectionName: 'coaches';
   info: {
@@ -833,6 +864,81 @@ export interface ApiCoachCoach extends Schema.CollectionType {
   };
 }
 
+export interface ApiContactContact extends Schema.SingleType {
+  collectionName: 'contacts';
+  info: {
+    singularName: 'contact';
+    pluralName: 'contacts';
+    displayName: 'contact';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    contactName: Attribute.String;
+    contactPosition: Attribute.String;
+    streetAddress: Attribute.String;
+    addressLocality: Attribute.String;
+    addressRegion: Attribute.String;
+    postalCode: Attribute.String;
+    email: Attribute.String;
+    officiateContact: Attribute.String;
+    officiatePhone: Attribute.String;
+    contactPhone: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact.contact',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact.contact',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEntryEntry extends Schema.SingleType {
+  collectionName: 'entries';
+  info: {
+    singularName: 'entry';
+    pluralName: 'entries';
+    displayName: 'entry';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    about: Attribute.String;
+    fee: Attribute.Integer;
+    due: Attribute.Date;
+    shirts: Attribute.Blocks;
+    refund: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::entry.entry',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::entry.entry',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiGameGame extends Schema.CollectionType {
   collectionName: 'games';
   info: {
@@ -849,24 +955,19 @@ export interface ApiGameGame extends Schema.CollectionType {
     time: Attribute.Time;
     home_team_score: Attribute.Integer;
     away_team_score: Attribute.Integer;
-    home_teams: Attribute.Relation<
+    home_team: Attribute.Relation<
       'api::game.game',
-      'manyToMany',
+      'manyToOne',
       'api::team.team'
     >;
-    locations: Attribute.Relation<
+    location: Attribute.Relation<
       'api::game.game',
-      'manyToMany',
+      'manyToOne',
       'api::location.location'
     >;
-    tournaments: Attribute.Relation<
+    round: Attribute.Relation<
       'api::game.game',
-      'manyToMany',
-      'api::tournament.tournament'
-    >;
-    rounds: Attribute.Relation<
-      'api::game.game',
-      'manyToMany',
+      'manyToOne',
       'api::round.round'
     >;
     coaches: Attribute.Relation<
@@ -879,11 +980,17 @@ export interface ApiGameGame extends Schema.CollectionType {
       'oneToOne',
       'api::team.team'
     >;
-    away_teams: Attribute.Relation<
+    away_team: Attribute.Relation<
       'api::game.game',
-      'manyToMany',
+      'manyToOne',
       'api::team.team'
     >;
+    tournament: Attribute.Relation<
+      'api::game.game',
+      'manyToOne',
+      'api::tournament.tournament'
+    >;
+    overtime: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -900,15 +1007,17 @@ export interface ApiLocationLocation extends Schema.CollectionType {
     singularName: 'location';
     pluralName: 'locations';
     displayName: 'location';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     name: Attribute.String;
+    address: Attribute.String;
     games: Attribute.Relation<
       'api::location.location',
-      'manyToMany',
+      'oneToMany',
       'api::game.game'
     >;
     createdAt: Attribute.DateTime;
@@ -925,6 +1034,63 @@ export interface ApiLocationLocation extends Schema.CollectionType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLodgingLodging extends Schema.CollectionType {
+  collectionName: 'lodgings';
+  info: {
+    singularName: 'lodging';
+    pluralName: 'lodgings';
+    displayName: 'lodging';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    link: Attribute.String;
+    phone: Attribute.Integer;
+    details: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::lodging.lodging',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::lodging.lodging',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMetaMeta extends Schema.SingleType {
+  collectionName: 'metas';
+  info: {
+    singularName: 'meta';
+    pluralName: 'metas';
+    displayName: 'meta';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    siteName: Attribute.String;
+    byLine: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::meta.meta', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::meta.meta', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -978,7 +1144,7 @@ export interface ApiRoundRound extends Schema.CollectionType {
     name: Attribute.String;
     games: Attribute.Relation<
       'api::round.round',
-      'manyToMany',
+      'oneToMany',
       'api::game.game'
     >;
     createdAt: Attribute.DateTime;
@@ -995,6 +1161,31 @@ export interface ApiRoundRound extends Schema.CollectionType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRuleRule extends Schema.CollectionType {
+  collectionName: 'rules';
+  info: {
+    singularName: 'rule';
+    pluralName: 'rules';
+    displayName: 'rule';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    detail: Attribute.Blocks;
+    order: Attribute.Integer;
+    name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::rule.rule', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::rule.rule', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -1057,26 +1248,27 @@ export interface ApiTeamTeam extends Schema.CollectionType {
       'manyToMany',
       'api::coach.coach'
     >;
-    tournaments: Attribute.Relation<
-      'api::team.team',
-      'manyToMany',
-      'api::tournament.tournament'
-    >;
     school: Attribute.Relation<
       'api::team.team',
       'manyToOne',
       'api::school.school'
     >;
-    home_games: Attribute.Relation<
+    tournaments: Attribute.Relation<
       'api::team.team',
       'manyToMany',
+      'api::tournament.tournament'
+    >;
+    home_games: Attribute.Relation<
+      'api::team.team',
+      'oneToMany',
       'api::game.game'
     >;
     away_games: Attribute.Relation<
       'api::team.team',
-      'manyToMany',
+      'oneToMany',
       'api::game.game'
     >;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1099,11 +1291,7 @@ export interface ApiTournamentTournament extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    games: Attribute.Relation<
-      'api::tournament.tournament',
-      'manyToMany',
-      'api::game.game'
-    >;
+    year: Attribute.String & Attribute.Required & Attribute.Unique;
     player: Attribute.Relation<
       'api::tournament.tournament',
       'manyToOne',
@@ -1115,8 +1303,12 @@ export interface ApiTournamentTournament extends Schema.CollectionType {
       'api::team.team'
     >;
     notes: Attribute.Blocks;
-    year: Attribute.String & Attribute.Required & Attribute.Unique;
-    name: Attribute.String;
+    games: Attribute.Relation<
+      'api::tournament.tournament',
+      'oneToMany',
+      'api::game.game'
+    >;
+    cancellation: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1153,11 +1345,17 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::activity.activity': ApiActivityActivity;
       'api::coach.coach': ApiCoachCoach;
+      'api::contact.contact': ApiContactContact;
+      'api::entry.entry': ApiEntryEntry;
       'api::game.game': ApiGameGame;
       'api::location.location': ApiLocationLocation;
+      'api::lodging.lodging': ApiLodgingLodging;
+      'api::meta.meta': ApiMetaMeta;
       'api::player.player': ApiPlayerPlayer;
       'api::round.round': ApiRoundRound;
+      'api::rule.rule': ApiRuleRule;
       'api::school.school': ApiSchoolSchool;
       'api::team.team': ApiTeamTeam;
       'api::tournament.tournament': ApiTournamentTournament;

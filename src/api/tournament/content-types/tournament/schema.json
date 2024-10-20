@@ -12,14 +12,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
-      "type": "string"
-    },
-    "games": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::game.game",
-      "inversedBy": "tournaments"
+    "year": {
+      "type": "string",
+      "regex": "^\\d{4}$",
+      "required": true,
+      "unique": true
     },
     "player": {
       "type": "relation",
@@ -36,11 +33,14 @@
     "notes": {
       "type": "blocks"
     },
-    "year": {
-      "type": "string",
-      "required": true,
-      "regex": "^\\d+$",
-      "unique": true
+    "games": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::game.game",
+      "mappedBy": "tournament"
+    },
+    "cancellation": {
+      "type": "string"
     }
   }
 }

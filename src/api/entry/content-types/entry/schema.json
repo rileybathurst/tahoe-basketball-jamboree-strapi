@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "entries",
+  "info": {
+    "singularName": "entry",
+    "pluralName": "entries",
+    "displayName": "entry",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "about": {
+      "type": "string"
+    },
+    "fee": {
+      "type": "integer"
+    },
+    "due": {
+      "type": "date"
+    },
+    "shirts": {
+      "type": "blocks"
+    },
+    "refund": {
+      "type": "string"
+    }
+  }
+}

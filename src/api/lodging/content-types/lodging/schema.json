@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "lodgings",
+  "info": {
+    "singularName": "lodging",
+    "pluralName": "lodgings",
+    "displayName": "lodging"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "integer"
+    },
+    "details": {
+      "type": "string"
+    }
+  }
+}

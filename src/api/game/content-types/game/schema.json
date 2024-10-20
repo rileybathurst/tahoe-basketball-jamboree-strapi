@@ -24,29 +24,23 @@
     "away_team_score": {
       "type": "integer"
     },
-    "home_teams": {
+    "home_team": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "manyToOne",
       "target": "api::team.team",
       "inversedBy": "home_games"
     },
-    "locations": {
+    "location": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "manyToOne",
       "target": "api::location.location",
-      "mappedBy": "games"
+      "inversedBy": "games"
     },
-    "tournaments": {
+    "round": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::tournament.tournament",
-      "mappedBy": "games"
-    },
-    "rounds": {
-      "type": "relation",
-      "relation": "manyToMany",
+      "relation": "manyToOne",
       "target": "api::round.round",
-      "mappedBy": "games"
+      "inversedBy": "games"
     },
     "coaches": {
       "type": "relation",
@@ -59,11 +53,21 @@
       "relation": "oneToOne",
       "target": "api::team.team"
     },
-    "away_teams": {
+    "away_team": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "manyToOne",
       "target": "api::team.team",
       "inversedBy": "away_games"
+    },
+    "tournament": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::tournament.tournament",
+      "inversedBy": "games"
+    },
+    "overtime": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

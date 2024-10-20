@@ -16,9 +16,9 @@
     },
     "games": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "oneToMany",
       "target": "api::game.game",
-      "inversedBy": "rounds"
+      "mappedBy": "round"
     }
   }
 }

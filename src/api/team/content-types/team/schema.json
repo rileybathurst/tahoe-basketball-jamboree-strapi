@@ -21,29 +21,35 @@
       "target": "api::coach.coach",
       "mappedBy": "teams"
     },
-    "tournaments": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::tournament.tournament",
-      "inversedBy": "teams"
-    },
     "school": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::school.school",
       "inversedBy": "teams"
     },
-    "home_games": {
+    "tournaments": {
       "type": "relation",
       "relation": "manyToMany",
+      "target": "api::tournament.tournament",
+      "inversedBy": "teams"
+    },
+    "home_games": {
+      "type": "relation",
+      "relation": "oneToMany",
       "target": "api::game.game",
-      "mappedBy": "home_teams"
+      "mappedBy": "home_team"
     },
     "away_games": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "oneToMany",
       "target": "api::game.game",
-      "mappedBy": "away_teams"
+      "mappedBy": "away_team"
+    },
+    "slug": {
+      "type": "string",
+      "unique": true,
+      "required": true,
+      "regex": "^[a-z0-9_-]+$"
     }
   }
 }
