@@ -17,6 +17,15 @@
     },
     "byLine": {
       "type": "string"
+    },
+    "facebook": {
+      "type": "string"
+    },
+    "cancelled": {
+      "type": "boolean"
+    },
+    "cancelNote": {
+      "type": "string"
     }
   }
 }

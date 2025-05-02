@@ -1,0 +1,32 @@
+{
+  "kind": "singleType",
+  "collectionName": "spreadsheets",
+  "info": {
+    "singularName": "spreadsheet",
+    "pluralName": "spreadsheets",
+    "displayName": "spreadsheet"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "results": {
+      "type": "string"
+    },
+    "rules": {
+      "type": "string"
+    },
+    "entry": {
+      "type": "string"
+    },
+    "lodging": {
+      "type": "string"
+    },
+    "activities": {
+      "type": "string"
+    },
+    "history": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "kind": "singleType",
+  "collectionName": "statements",
+  "info": {
+    "singularName": "statement",
+    "pluralName": "statements",
+    "displayName": "statement"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "home": {
+      "type": "string"
+    }
+  }
+}
